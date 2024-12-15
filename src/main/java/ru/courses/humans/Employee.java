@@ -1,9 +1,9 @@
 package ru.courses.humans;
 
 public class Employee {
-    private static final Employee noEmployee = new Employee("[Сотрудник не назначен]", null);
-    private String name;
-    private Department department;
+    static final Employee noEmployee = new Employee("[Сотрудник не назначен]", null);
+    String name;
+    Department department;
 
     public Employee(String name, Department department) {
         this.name = name;
@@ -11,7 +11,7 @@ public class Employee {
     }
 
     public Employee(String name) {
-        this(name, null);
+        this.name = name;
     }
 
     public String getName() {
@@ -29,8 +29,8 @@ public class Employee {
     public void setDepartment(Department department) {
         if (this.department != null
                 && this.department != department
-                && this.department.getBoss() == this) {
-            this.department.setBoss(noEmployee);
+                && this.department.boss == this) {
+            this.department.boss = noEmployee;
         }
         this.department = department;
     }
@@ -38,15 +38,15 @@ public class Employee {
     @Override
     public String toString() {
         String res;
-        if (department != null && this == department.getBoss()) {
-            res = String.format("%s начальник отдела %s", name, department.getName());
+        if (department != null && this == department.boss) {
+            res = String.format("%s начальник отдела %s", name, department.name);
         } else {
             String depName = null;
             String depBossName = null;
             if (department != null) {
-                depName = department.getName();
-                if (department.getBoss() != null) {
-                    depBossName = department.getBoss().getName();
+                depName = department.name;
+                if (department.boss != null) {
+                    depBossName = department.boss.name;
                 }
             }
             res = String.format("%s работает в отделе %s, начальником которого является %s", name, depName, depBossName);

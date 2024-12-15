@@ -21,6 +21,6 @@ public final class Student {
     }
 
     public String toString() {
-        return "ru.courses.humans.Student{" + " grades=" + grades + ", name=" + name + '}';
+        return "ru.courses.humans.edu.innotech.Student{" + " grades=" + grades + ", name=" + name + '}';
     }
 }
